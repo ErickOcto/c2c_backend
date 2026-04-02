@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('dispute_messages', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('dispute_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('sender_id')->constrained('users')->cascadeOnDelete();
+
+            $table->text('message');
+            $table->string('attachment')->nullable();
+
             $table->timestamps();
         });
     }

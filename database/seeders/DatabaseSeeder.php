@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
      */
 public function run()
 {
-    // USERS
     DB::table('users')->insert([
         ['name'=>'User1','email'=>'u1@mail.com','password'=>Hash::make('123'),'role'=>'buyer'],
         ['name'=>'User2','email'=>'u2@mail.com','password'=>Hash::make('123'),'role'=>'seller'],
@@ -26,7 +25,6 @@ public function run()
         ['name'=>'Admin','email'=>'admin@mail.com','password'=>Hash::make('123'),'role'=>'admin'],
     ]);
 
-    // CATEGORIES
     DB::table('categories')->insert([
         ['name'=>'Electronics'],
         ['name'=>'Fashion'],
@@ -35,7 +33,6 @@ public function run()
         ['name'=>'Others'],
     ]);
 
-    // PROFILES
     for ($i=1; $i<=5; $i++) {
         DB::table('profiles')->insert([
             'user_id'=>$i,
@@ -45,7 +42,6 @@ public function run()
         ]);
     }
 
-    // PRODUCTS
     for ($i=1; $i<=5; $i++) {
         DB::table('products')->insert([
             'user_id'=>2,
@@ -58,7 +54,6 @@ public function run()
         ]);
     }
 
-    // PRODUCT IMAGES
     for ($i=1; $i<=5; $i++) {
         DB::table('product_images')->insert([
             'product_id'=>$i,
@@ -66,7 +61,6 @@ public function run()
         ]);
     }
 
-    // ORDERS
     for ($i=1; $i<=5; $i++) {
         DB::table('orders')->insert([
             'buyer_id'=>1,
@@ -75,7 +69,6 @@ public function run()
         ]);
     }
 
-    // ORDER ITEMS
     for ($i=1; $i<=5; $i++) {
         DB::table('order_items')->insert([
             'order_id'=>$i,
@@ -85,7 +78,6 @@ public function run()
         ]);
     }
 
-    // TRANSACTIONS
     for ($i=1; $i<=5; $i++) {
         DB::table('transactions')->insert([
             'order_id'=>$i,
@@ -95,7 +87,6 @@ public function run()
         ]);
     }
 
-    // REVIEWS
     for ($i=1; $i<=5; $i++) {
         DB::table('reviews')->insert([
             'user_id'=>1,
@@ -105,7 +96,6 @@ public function run()
         ]);
     }
 
-    // MESSAGES
     for ($i=1; $i<=5; $i++) {
         DB::table('messages')->insert([
             'sender_id'=>1,
@@ -114,7 +104,6 @@ public function run()
         ]);
     }
 
-    // NOTIFICATIONS
     for ($i=1; $i<=5; $i++) {
         DB::table('notifications')->insert([
             'user_id'=>1,
@@ -124,7 +113,6 @@ public function run()
         ]);
     }
 
-    // REPORTS
     for ($i=1; $i<=5; $i++) {
         DB::table('reports')->insert([
             'reporter_id'=>1,
@@ -133,5 +121,87 @@ public function run()
             'status'=>'pending',
         ]);
     }
+
+    for ($i = 1; $i <= 5; $i++) {
+        DB::table('wishlists')->insert([
+            'user_id' => 1,
+            'product_id' => $i,
+        ]);
+    }
+
+
+    DB::table('carts')->insert([
+        ['user_id' => 1],
+        ['user_id' => 2],
+        ['user_id' => 3],
+        ['user_id' => 4],
+        ['user_id' => 5],
+    ]);
+
+    for ($i = 1; $i <= 5; $i++) {
+        DB::table('cart_items')->insert([
+            'cart_id' => 1,
+            'product_id' => $i,
+            'quantity' => rand(1, 3),
+        ]);
+    }
+
+    for ($i = 1; $i <= 5; $i++) {
+        DB::table('shippings')->insert([
+            'order_id' => $i,
+            'courier' => 'JNE',
+            'tracking_number' => 'RESI00' . $i,
+            'status' => 'shipped',
+        ]);
+    }
+
+    foreach (range(1, 5) as $i) {
+        DB::table('shipping_histories')->insert([
+            [
+                'shipping_id' => $i,
+                'status' => 'Package picked up',
+                'location' => 'Warehouse',
+                'updated_at' => now(),
+            ],
+            [
+                'shipping_id' => $i,
+                'status' => 'In transit',
+                'location' => 'Jakarta',
+                'updated_at' => now(),
+            ],
+            [
+                'shipping_id' => $i,
+                'status' => 'Delivered',
+                'location' => 'Customer City',
+                'updated_at' => now(),
+            ],
+        ]);
+    }
+
+    for ($i = 1; $i <= 5; $i++) {
+        DB::table('disputes')->insert([
+            'order_id' => $i,
+            'buyer_id' => 1,
+            'seller_id' => 2,
+            'reason' => 'Item not as described',
+            'description' => 'Product ' . $i . ' is not original',
+            'status' => 'open',
+        ]);
+    }
+
+    foreach (range(1, 5) as $i) {
+        DB::table('dispute_messages')->insert([
+            [
+                'dispute_id' => $i,
+                'sender_id' => 1,
+                'message' => 'I want refund for order ' . $i,
+            ],
+            [
+                'dispute_id' => $i,
+                'sender_id' => 2,
+                'message' => 'Please provide proof',
+            ],
+        ]);
+    }    
 }
 }

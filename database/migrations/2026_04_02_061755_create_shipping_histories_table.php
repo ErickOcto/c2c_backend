@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('shipping_histories', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('shipping_id')->constrained()->cascadeOnDelete();
+            $table->string('status');
+            $table->string('location')->nullable();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

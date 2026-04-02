@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\ShippingHistories;
+use App\Models\ShippingHistory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<ShippingHistories>
+ * @extends Factory<ShippingHistory>
  */
-class ShippingHistoriesFactory extends Factory
+class ShippingHistoryFactory extends Factory
 {
     /**
      * Define the model's default state.

@@ -6,4 +6,7 @@ function App() {
     return <h1>Hello React in Laravel 🚀</h1>;
 }
 
-ReactDOM.createRoot(document.getElementById('app')).render(<App />);
+const el = document.getElementById('app');
+if (el) {
+    ReactDOM.createRoot(el).render(<App />);
+}
